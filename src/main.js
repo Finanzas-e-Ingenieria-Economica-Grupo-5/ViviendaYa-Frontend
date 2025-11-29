@@ -6,6 +6,8 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import PrimeVue from 'primevue/config';
 import Material from '@primeuix/themes/material';
+
+
 import {
     Button,
     Card,
@@ -19,7 +21,7 @@ import {
 } from "primevue";
 import router from "./router.js";
 import pinia from "./pinia.js";
-import{useAuthStore} from "./userManagment/application/user.store.js";
+import { useAuthStore } from "./userManagment/application/user.store.js";
 
 const app = createApp(App);
 
