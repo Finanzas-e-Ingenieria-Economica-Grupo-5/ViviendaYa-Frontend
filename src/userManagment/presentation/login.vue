@@ -44,7 +44,7 @@ const password = ref('');
 const handleLogin = async () => {
   const success = await auth.login(username.value, password.value);
   console.log("Login success:", success);
-  if (success) router.push('/gluco');
+  if (success) router.push('/customer');
 };
 
 

@@ -9,5 +9,23 @@
     "email": "Correo electrónico",
     "password": "Contraseña",
     "logout": "Cerrar sesión"
+  },
+
+  "customer": {
+    "title": "Clientes",
+    "new": "Nuevo Cliente",
+    "edit": "Editar Cliente",
+    "actions": "Acciones",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "income": "Ingresos",
+    "dependents": "Dependientes",
+    "employmentStatus": "Situación laboral",
+    "maritalStatus": "Estado civil",
+    "segment": "Segmento",
+    "save": "Guardar",
+    "cancel": "Cancelar"
   }
 }

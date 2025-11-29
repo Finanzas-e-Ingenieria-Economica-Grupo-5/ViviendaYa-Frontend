@@ -12,5 +12,31 @@
       "password": "123",
       "id": 2
     }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "firstName": "Juan",
+      "lastName": "Pérez",
+      "email": "juan@gmail.com",
+      "phone": "987654321",
+      "income": 2500,
+      "dependents": 2,
+      "employmentStatus": "Empleado",
+      "maritalStatus": "Soltero",
+      "segment": "MiVivienda"
+    },
+    {
+      "id": 2,
+      "firstName": "Lucía",
+      "lastName": "Torres",
+      "email": "lucia@gmail.com",
+      "phone": "912345678",
+      "income": 3500,
+      "dependents": 1,
+      "employmentStatus": "Independiente",
+      "maritalStatus": "Casada",
+      "segment": "Techo Propio"
+    }
   ]
 }

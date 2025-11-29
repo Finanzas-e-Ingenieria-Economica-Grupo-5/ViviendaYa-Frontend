@@ -3,7 +3,7 @@
     <aside :class="['sidenav', { collapsed }]">
       <div class="logo-container" @click="toggleSidebar">
         <img
-            src="https://i.postimg.cc/c4Cdqjtg/Whats-App-Image-2025-10-01-at-13-53-49-removebg-preview.png"
+            src="https://i.postimg.cc/13qvP203/vivienda-Ya.png"
             alt="Logo"
             class="logo"
         />
@@ -11,9 +11,9 @@
       </div>
 
       <nav class="menu">
-        <RouterLink to="/gluco">
+        <RouterLink to="/customer">
           <i class="pi pi-heart"></i>
-          <span v-if="!collapsed">{{ t('sidebar.glucometer') }}</span>
+          <span v-if="!collapsed">{{ t('sidebar.customer') }}</span>
         </RouterLink>
 
         <RouterLink to="/healthy">

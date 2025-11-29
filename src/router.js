@@ -1,4 +1,3 @@
-
 import { createRouter, createWebHistory } from "vue-router";
 import Layout from "./shared/presentation/components/layout.vue";
 import Auth from "./shared/presentation/components/auth.layout.vue";
@@ -6,7 +5,7 @@ import Login from "./userManagment/presentation/login.vue";
 import Register from "./userManagment/presentation/register.vue";
 import PageNotFound from "./shared/presentation/views/page-not-found.vue";
 import Home from "./shared/presentation/views/home.vue";
-
+import CustomerManagement from "./customer/presentation/views/customer-management.page.vue";
 
 const routes = [
     {
@@ -15,7 +14,6 @@ const routes = [
         children: [
             { path: "register", name: "register", component: Register, meta: { title: "Register" } },
             { path: "login", name: "login", component: Login, meta: { title: "Login" } },
-
         ],
     },
 
@@ -24,7 +22,7 @@ const routes = [
         component: Layout,
         children: [
             { path: "", name: "home", component: Home, meta: { title: "Home" } },
-
+            { path: "customer", name: "customer", component: CustomerManagement, meta: { title: "Customer" } },
         ],
     },
 

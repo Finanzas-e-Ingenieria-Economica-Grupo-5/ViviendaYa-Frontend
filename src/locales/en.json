@@ -9,5 +9,38 @@
     "email": "Email",
     "password": "Password",
     "logout": "Logout"
+  },
+  "customer": {
+    "title": "Customers",
+    "new": "New Customer",
+    "edit": "Edit Customer",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "income": "Income",
+    "dependents": "Dependents",
+    "employmentStatus": "Employment Status",
+    "maritalStatus": "Marital Status",
+    "segment": "Segment",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "customer": {
+    "title": "Customers",
+    "new": "New Customer",
+    "edit": "Edit Customer",
+    "actions": "Actions",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "income": "Income",
+    "dependents": "Dependents",
+    "employmentStatus": "Employment Status",
+    "maritalStatus": "Marital Status",
+    "segment": "Segment",
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }
