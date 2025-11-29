@@ -1,0 +1,13 @@
+{
+  "page-not-found": {
+    "title": "Página no encontrada",
+    "content": "La ruta {unavailable-route} no se encuentra disponible.",
+    "go-home": "Ir a Inicio"
+  },
+  "profile": {
+    "userProfile": "Perfil de usuario",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "logout": "Cerrar sesión"
+  }
+}
