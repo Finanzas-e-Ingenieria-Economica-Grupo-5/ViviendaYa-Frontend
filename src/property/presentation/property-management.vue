@@ -11,14 +11,18 @@ const store = usePropertyStore();
 const dialogVisible = ref(false);
 const isEditing = ref(false);
 
-// ⬅️ YA NO ES ref() — ES reactive()
 const form = reactive(new PropertyEntity());
 
-const propertyTypeOptions = [
+
+import { computed, unref } from "vue";
+
+const propertyTypeOptions = computed(() => [
   { label: t("property.type.department"), value: PropertyType.DEPARTMENT },
   { label: t("property.type.house"), value: PropertyType.HOUSE },
-  { label: t("property.type.land"), value: PropertyType.LAND },
-];
+  { label: t("property.type.land"), value: PropertyType.LAND }
+]);
+
+
 
 onMounted(() => {
   if (!store.loaded) store.fetchProperties();
@@ -116,16 +120,18 @@ const deleteProperty = (property) => {
         </pv-float-label>
 
         <pv-float-label>
-          <pv-dropdown
-              id="type"
+          <pv-select
               v-model="form.type"
               :options="propertyTypeOptions"
               optionLabel="label"
               optionValue="value"
+              inputId="type"
               class="w-full"
           />
           <label for="type">Tipo</label>
         </pv-float-label>
+
+
 
         <pv-float-label>
           <pv-input-number id="area" v-model="form.area" class="w-full" inputClass="w-full" />
