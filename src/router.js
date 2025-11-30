@@ -7,6 +7,8 @@ import PageNotFound from "./shared/presentation/views/page-not-found.vue";
 import Home from "./shared/presentation/views/home.vue";
 import CustomerManagement from "./customer/presentation/views/customer-management.page.vue";
 import PropertyManagement from "./property/presentation/property-management.vue";
+import SystemConfig from "./systemConfig/presentation/system-config.vue";
+
 const routes = [
     {
         path: "/auth",
@@ -24,8 +26,7 @@ const routes = [
             { path: "", name: "home", component: Home, meta: { title: "Home" } },
             { path: "customer", name: "customer", component: CustomerManagement, meta: { title: "Customer" } },
             { path: "property", name: "property", component: PropertyManagement, meta: { title: "Property" } },
-
-
+            { path: "system-config", name: "system-config", component: SystemConfig, meta: { title: "Configuración" } }, // ✅ Mover dentro de Layout
         ],
     },
 

@@ -14,22 +14,6 @@
     "title": "Customers",
     "new": "New Customer",
     "edit": "Edit Customer",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
-    "phone": "Phone",
-    "income": "Income",
-    "dependents": "Dependents",
-    "employmentStatus": "Employment Status",
-    "maritalStatus": "Marital Status",
-    "segment": "Segment",
-    "save": "Save",
-    "cancel": "Cancel"
-  },
-  "customer": {
-    "title": "Customers",
-    "new": "New Customer",
-    "edit": "Edit Customer",
     "actions": "Actions",
     "firstName": "First Name",
     "lastName": "Last Name",
@@ -55,5 +39,40 @@
       "house": "House",
       "land": "Land"
     }
+  },
+  "systemConfig": {
+    "title": "System Configuration",
+    "subtitle": "Configure the general parameters of the financial system",
+    "currency": "Currency",
+    "interestType": "Interest Type",
+    "capitalization": "Capitalization",
+    "gracePeriod": "Grace Period (months)",
+    "actions": "Actions",
+    "edit": "Edit",
+    "save": "Save Configuration",
+    "cancel": "Cancel",
+    "summary": "Configuration Summary",
+    "months": "months",
+    "currencyOptions": {
+      "soles": "Soles",
+      "dollars": "Dollars"
+    },
+    "interestOptions": {
+      "nominal": "Nominal",
+      "effective": "Effective"
+    },
+    "capitalizationOptions": {
+      "monthly": "Monthly",
+      "bimonthly": "Bimonthly",
+      "quarterly": "Quarterly",
+      "semiannual": "Semiannual",
+      "annual": "Annual"
+    }
+  },
+  "sidebar": {
+    "customer": "Customers",
+    "property": "Properties",
+    "configuration": "Configuration",
+    "logout": "Logout"
   }
 }
