@@ -185,13 +185,22 @@ const cancelEditing = () => {
 };
 
 const save = async () => {
-  const success = await store.saveConfig(localConfig.value);
+  const payload = {
+    currency: localConfig.value.currency,
+    interestType: localConfig.value.interestType,
+    capitalization: localConfig.value.capitalization,
+    gracePeriod: localConfig.value.gracePeriodMonths,
+    graceType: localConfig.value.graceType ?? "Ninguno"
+  };
+
+  const success = await store.updateConfig(payload);
+
   if (success) {
     isEditing.value = false;
-    originalConfig.value = new SystemConfigEntity({ ...localConfig.value });
-    console.log('Configuración guardada exitosamente');
+    originalConfig.value = new SystemConfigEntity({ ...payload });
   }
 };
+
 </script>
 
 <style scoped>

@@ -1,44 +1,60 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import { SystemConfigApi } from "../infrastructure/system-config.api.js";
-import { SystemConfigEntity } from "../domain/system-config.entity.js";
-
-const api = new SystemConfigApi();
+import { reactive } from "vue";
 
 export const useSystemConfigStore = defineStore("systemConfig", () => {
-    const config = ref(new SystemConfigEntity());
-    const loading = ref(false);
 
+    // CONFIG REACTIVA REAL
+    const config = reactive({
+        currency: "Soles",
+        interestType: "Nominal",
+        capitalization: "Annual",
+        graceType: "Ninguno",
+        gracePeriod: 0
+    });
+
+    // CARGAR CONFIG DE DB.JSON
     async function loadConfig() {
-        loading.value = true;
         try {
-            const data = await api.getConfig();
-            config.value = new SystemConfigEntity(data);
-        } catch (error) {
-            console.error('Error loading config:', error);
-        } finally {
-            loading.value = false;
+            const res = await fetch("http://localhost:3001/systemConfig");
+            const data = await res.json();
+
+            // copiar cada campo para mantener la reactividad
+            config.currency = data.currency;
+            config.interestType = data.interestType;
+            config.capitalization = data.capitalization;
+            config.graceType = data.graceType;
+            config.gracePeriod = data.gracePeriod;
+        } catch (e) {
+            console.error("Error loading config:", e);
         }
     }
 
-    async function saveConfig(newConfig) {
-        loading.value = true;
+    // GUARDAR CAMBIOS EN DB.JSON
+    async function updateConfig(newConfig) {
         try {
-            const saved = await api.saveConfig(newConfig);
-            config.value = new SystemConfigEntity(saved);
-            return true;
-        } catch (error) {
-            console.error('Error saving config:', error);
-            return false;
-        } finally {
-            loading.value = false;
+            const res = await fetch("http://localhost:3001/systemConfig", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newConfig)
+            });
+
+            const updated = await res.json();
+
+            // Volver a actualizar el estado reactivo
+            config.currency = updated.currency;
+            config.interestType = updated.interestType;
+            config.capitalization = updated.capitalization;
+            config.graceType = updated.graceType;
+            config.gracePeriod = updated.gracePeriod;
+
+        } catch (e) {
+            console.error("Error updating config:", e);
         }
     }
 
     return {
         config,
-        loading,
         loadConfig,
-        saveConfig
+        updateConfig
     };
 });

@@ -52,6 +52,9 @@
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useFinanceStore } from "../application/finance.store.js";
+import { useSystemConfigStore } from "../../systemConfig/application/system-config.store.js";
+const configStore = useSystemConfigStore();
+const currency = computed(() => configStore.config.currency);
 
 const router = useRouter();
 const finance = useFinanceStore();
@@ -89,11 +92,13 @@ function sum(field) {
 }
 
 function formatMoney(n) {
-  return n.toLocaleString("en-US", {
+  const symbol = currency.value === "Soles" ? "S/" : currency.value === "Dólares" ? "$" : currency.value;
+  return symbol + " " + n.toLocaleString("en-US", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }) + " USD";
+  });
 }
+
 </script>
 
 <style scoped>

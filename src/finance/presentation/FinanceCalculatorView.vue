@@ -6,72 +6,59 @@
       <form @submit.prevent="handleSubmit" class="form-grid">
 
         <div class="form-column">
+
           <div class="form-group">
             <label>Monto de Crédito</label>
             <div class="input-with-symbol">
               <input
-                type="number"
-                v-model.number="form.montoCredito"
-                placeholder="Monto"
-                min="0"
-                required
+                  type="number"
+                  v-model.number="form.montoCredito"
+                  placeholder="Monto"
+                  min="0"
+                  required
               />
-              <select v-model="form.moneda" class="currency-select">
-                <option value="USD">$</option>
-                <option value="PEN">S/</option>
-              </select>
+
+              <!-- 👉 Símbolo dinámico y reactivo -->
+              <span class="symbol-text">
+                {{ currencySymbol }}
+              </span>
             </div>
           </div>
 
           <div class="form-group">
             <label>Plazo (meses)</label>
             <input
-              type="number"
-              v-model.number="form.plazo"
-              placeholder="Plazo (meses)"
-              min="1"
-              required
+                type="number"
+                v-model.number="form.plazo"
+                min="1"
+                required
             />
           </div>
 
+          <!-- 🔥 Tipo de tasa viene de Config (reactivo) -->
           <div class="form-group">
             <label>Tipo de Tasa</label>
-            <select v-model="form.tipoTasa" required>
-              <option disabled value="">Selecciona un tipo</option>
-              <option value="Nominal">Nominal</option>
-              <option value="Efectiva">Efectiva</option>
-            </select>
+            <p><strong>{{ tipoTasa }}</strong></p>
           </div>
 
           <div class="form-group">
             <label>Tasa de Interés (%)</label>
             <div class="input-with-symbol right-symbol">
               <input
-                type="number"
-                v-model.number="form.tasaInteres"
-                placeholder="Ej: 15.0"
-                step="0.01"
-                min="0"
-                required
+                  type="number"
+                  v-model.number="form.tasaInteres"
+                  step="0.01"
+                  min="0"
+                  required
               />
               <span class="symbol-text">%</span>
             </div>
           </div>
 
+          <!-- 🔒 Capitalización fija desde Config -->
           <div class="form-group">
             <label>Capitalización</label>
-            <select 
-                v-model="form.capitalizacion" 
-                :disabled="form.tipoTasa === 'Efectiva'"
-                required
-            >
-              <option disabled value="">Frecuencia</option>
-              <option value="Mensual">Mensual</option>
-              <option value="Bimestral">Bimestral</option>
-              <option value="Trimestral">Trimestral</option>
-              <option value="Semestral">Semestral</option>
-              <option value="Anual">Anual</option>
-            </select>
+            <p><strong>{{ capitalizacion }}</strong></p>
           </div>
         </div>
 
@@ -87,23 +74,13 @@
           </div>
 
           <div class="form-group">
-            <label>Periodo de Gracia</label>
-            <select v-model="form.tipoGracia" required>
-              <option value="Ninguno">Ninguno</option>
-              <option value="Total">Total</option>
-              <option value="Parcial">Parcial</option>
-            </select>
+            <label>Tipo de Gracia</label>
+            <p><strong>{{ tipoGracia }}</strong></p>
           </div>
 
           <div class="form-group">
             <label>Meses de Gracia</label>
-            <input
-              type="number"
-              v-model.number="form.mesesGracia"
-              :disabled="form.tipoGracia === 'Ninguno'"
-              min="0"
-              placeholder="0"
-            />
+            <p><strong>{{ mesesGracia }}</strong></p>
           </div>
 
           <div class="form-group toggle-group">
@@ -118,56 +95,75 @@
 
       <div class="button-container">
         <button class="primary-btn" @click="handleSubmit">
-            {{ finance.isLoading ? 'CALCULANDO...' : 'CALCULAR CRÉDITO' }}
+          {{ finance.isLoading ? 'CALCULANDO...' : 'CALCULAR CRÉDITO' }}
         </button>
       </div>
+
     </div>
   </div>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useFinanceStore } from "../application/finance.store.js"; // Asegúrate que la ruta sea correcta
+
+import { useFinanceStore } from "../application/finance.store.js";
+import { useSystemConfigStore } from "../../systemConfig/application/system-config.store.js";
 
 const router = useRouter();
 const finance = useFinanceStore();
+const configStore = useSystemConfigStore();
 
-// FORMULARIO REACTIVO (Ajustado para coincidir con el Service)
+// ⚡ Form solo contiene datos ingresados por el usuario
 const form = reactive({
-  montoCredito: 12000, // Nombre ajustado
-  moneda: "PEN",
+  montoCredito: 12000,
   plazo: 12,
-  tasaInteres: null,   // CAMPO NUEVO
-  tipoTasa: "Efectiva",
-  capitalizacion: "Anual",
+  tasaInteres: null,
   tipoCredito: "TechoPropio",
-  tipoGracia: "Ninguno",
-  mesesGracia: 0,
-  aplicaBono: true,    // Nombre ajustado
+  aplicaBono: true,
 });
 
+// ⚡ Lo que viene del Config ahora es COMPUTED (reactivo)
+const currencySymbol = computed(() =>
+    configStore.config.currency === "Soles" ? "S/" : "$"
+);
+
+const tipoTasa = computed(() => configStore.config.interestType);
+const capitalizacion = computed(() => configStore.config.capitalization);
+const tipoGracia = computed(() => configStore.config.graceType || "Ninguno");
+const mesesGracia = computed(() => configStore.config.gracePeriod);
+
+onMounted(async () => {
+  console.log("🔄 Cargando configuración antes de mostrar la vista...");
+  await configStore.loadConfig();
+  console.log("✔ Configuración cargada:", configStore.config);
+});
+
+
 async function handleSubmit() {
-  // 1. Validación básica
   if (!form.tasaInteres || form.tasaInteres <= 0) {
     alert("Por favor ingresa una Tasa de Interés válida.");
     return;
   }
 
   try {
-    // 2. Llamada al Store (Esperamos con await)
-    // NOTA: Asegúrate de que en tu store la acción se llame 'calculateCredit'
-    await finance.calculateCredit(form); 
-    
-    // 3. Redirección (Solo ocurre si el cálculo fue exitoso)
-    // Verifica que esta ruta exista en tu router/index.js
-    router.push("/finance/results"); 
-    
+    await finance.calculateCredit({
+      ...form,
+      currency: currencySymbol.value,
+      interestType: tipoTasa.value,
+      capitalization: capitalizacion.value,
+      tipoGracia: tipoGracia.value,
+      mesesGracia: mesesGracia.value
+    });
+
+    router.push("/finance/results");
   } catch (error) {
-    console.error("Error en el proceso:", error);
+    console.error("Error calculando crédito:", error);
   }
 }
 </script>
+
+
 
 <style scoped>
 /* Estilos generales */

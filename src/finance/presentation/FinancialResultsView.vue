@@ -67,22 +67,39 @@
 import { onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useFinanceStore } from "../application/finance.store.js";
-import ResultCard from "./components/ResultCard.vue"; // Asegúrate de haber creado este archivo
+import { useSystemConfigStore } from "../../systemConfig/application/system-config.store.js";
+import ResultCard from "./components/ResultCard.vue";
 
 const router = useRouter();
 const finance = useFinanceStore();
+const configStore = useSystemConfigStore();
 
-// Usamos computed para que sea reactivo si cambia el store
-// NOTA: Cambié 'results' por 'indicators' para coincidir con el store que creamos antes
+// Indicadores calculados
 const indicators = computed(() => finance.indicators);
 
-// Seguridad: Si el usuario refresca la página y se pierden los datos, volver al inicio
+// 🔥 Símbolo de moneda según Config
+const currencySymbol = computed(() => {
+  return configStore.config.currency === "Soles" ? "S/" : "$";
+});
+
+// 🔥 Formato de dinero con símbolo dinámico
+function formatMoney(n) {
+  if (n === undefined || n === null) return currencySymbol.value + " 0.00";
+
+  return (
+      currencySymbol.value +
+      " " +
+      Number(n).toLocaleString("es-PE", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
+  );
+}
+
 onMounted(() => {
-    // Si la cuota es 0 o undefined, significa que no se ha calculado nada
-    if (!finance.indicators || !finance.indicators.cuotaMensual) {
-        // Opcional: Descomenta esto si quieres que los redirija automáticamente
-        // router.push("/finance/calculator");
-    }
+  if (!finance.indicators || !finance.indicators.cuotaMensual) {
+    // router.push("/finance/calculator");
+  }
 });
 
 function goBack() {
@@ -91,16 +108,6 @@ function goBack() {
 
 function goSchedule() {
   router.push("/finance/schedule");
-}
-
-function formatMoney(n) {
-  if (n === undefined || n === null) return "0.00";
-  // Usamos una moneda genérica o podrías leer finance.formData.moneda
-  return Number(n).toLocaleString("es-PE", {
-    style: "currency",
-    currency: "PEN", // O pon "USD" si prefieres
-    minimumFractionDigits: 2
-  });
 }
 </script>
 

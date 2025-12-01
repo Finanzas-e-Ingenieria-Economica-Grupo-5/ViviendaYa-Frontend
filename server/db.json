@@ -125,15 +125,126 @@
         }
       },
       "id": 1
+    },
+    {
+      "fecha": "2025-12-01T17:56:22.306Z",
+      "parametrosUsados": {
+        "montoCredito": 12000,
+        "moneda": "USD",
+        "plazo": 12,
+        "tasaInteres": 12,
+        "tipoTasa": "ELECTIVA",
+        "capitalizacion": "SEMESTRAL",
+        "tipoCredito": "TechoPropio",
+        "tipoGracia": "Sin gracia",
+        "aplicaBono": true
+      },
+      "resultado": {
+        "schedule": [
+          {
+            "periodo": 1,
+            "interes": -28.466378803749137,
+            "cuota": -265.68620216832335,
+            "amortizacion": -237.2198233645742,
+            "saldo": -2762.780176635426
+          },
+          {
+            "periodo": 2,
+            "interes": -26.21544901986433,
+            "cuota": -265.68620216832335,
+            "amortizacion": -239.470753148459,
+            "saldo": -2523.309423486967
+          },
+          {
+            "periodo": 3,
+            "interes": -23.94316062934995,
+            "cuota": -265.68620216832335,
+            "amortizacion": -241.7430415389734,
+            "saldo": -2281.5663819479932
+          },
+          {
+            "periodo": 4,
+            "interes": -21.649310964810322,
+            "cuota": -265.68620216832335,
+            "amortizacion": -244.03689120351302,
+            "saldo": -2037.5294907444802
+          },
+          {
+            "periodo": 5,
+            "interes": -19.333695435780815,
+            "cuota": -265.68620216832335,
+            "amortizacion": -246.35250673254254,
+            "saldo": -1791.1769840119377
+          },
+          {
+            "periodo": 6,
+            "interes": -16.996107510480243,
+            "cuota": -265.68620216832335,
+            "amortizacion": -248.6900946578431,
+            "saldo": -1542.4868893540947
+          },
+          {
+            "periodo": 7,
+            "interes": -14.636338697390114,
+            "cuota": -265.68620216832335,
+            "amortizacion": -251.04986347093325,
+            "saldo": -1291.4370258831614
+          },
+          {
+            "periodo": 8,
+            "interes": -12.254178526659084,
+            "cuota": -265.68620216832335,
+            "amortizacion": -253.43202364166427,
+            "saldo": -1038.005002241497
+          },
+          {
+            "periodo": 9,
+            "interes": -9.849414531330977,
+            "cuota": -265.68620216832335,
+            "amortizacion": -255.83678763699237,
+            "saldo": -782.1682146045048
+          },
+          {
+            "periodo": 10,
+            "interes": -7.421832228394661,
+            "cuota": -265.68620216832335,
+            "amortizacion": -258.2643699399287,
+            "saldo": -523.9038446645761
+          },
+          {
+            "periodo": 11,
+            "interes": -4.971215099654123,
+            "cuota": -265.68620216832335,
+            "amortizacion": -260.71498706866925,
+            "saldo": -263.1888575959069
+          },
+          {
+            "periodo": 12,
+            "interes": -2.4973445724170245,
+            "cuota": -265.68620216832335,
+            "amortizacion": -263.1888575959063,
+            "saldo": 0
+          }
+        ],
+        "indicators": {
+          "van": 500.25,
+          "tir": 12,
+          "totalInteres": -188.2344260198808,
+          "totalAmortizacion": -2999.9999999999995,
+          "cuotaMensual": -265.68620216832335,
+          "ctc": -3188.23442601988
+        }
+      },
+      "id": 2
     }
   ],
   "system-config": [
     {
       "id": 1,
-      "currency": "USD",
-      "interestType": "ELECTIVA",
-      "capitalization": "SEMESTRAL",
-      "gracePeriodMonths": 2,
+      "currency": "PEN",
+      "interestType": "NOMINAL",
+      "capitalization": "ANUAL",
+      "gracePeriodMonths": 6,
       "financialInstitutions": []
     }
   ],
