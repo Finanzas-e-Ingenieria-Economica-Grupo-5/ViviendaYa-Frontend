@@ -63,5 +63,24 @@
       "semiannual": "Semestral",
       "annual": "Anual"
     }
+  },
+  "property": {
+    "title": "Propiedades",
+    "new": "Nueva Propiedad",
+    "edit": "Editar Propiedad",
+    "name": "Nombre",
+    "price": "Precio",
+    "type": {
+      "label": "Tipo",
+      "department": "Departamento",
+      "house": "Casa",
+      "land": "Terreno"
+    },
+    "area": "Área (m²)",
+    "location": "Ubicación",
+    "actions": "Acciones",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar"
   }
 }

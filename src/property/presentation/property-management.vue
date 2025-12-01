@@ -1,35 +1,104 @@
+<template>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h2>{{ t("property.title") }}</h2>
+      <button class="btn btn-success" @click="openNew">{{ t("property.new") }}</button>
+    </div>
+
+    <!-- TABLE -->
+    <div class="card">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>{{ t("property.name") }}</th>
+          <th>{{ t("property.price") }}</th>
+          <th>{{ t("property.type.label") }}</th>
+          <th>{{ t("property.area") }}</th>
+          <th>{{ t("property.location") }}</th>
+          <th>{{ t("property.actions") }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="property in store.properties" :key="property.id">
+          <td>{{ property.name }}</td>
+          <td>{{ property.price }}</td>
+          <td>{{ t(`property.type.${property.type.toLowerCase()}`) }}</td>
+          <td>{{ property.area }}</td>
+          <td>{{ property.location }}</td>
+          <td>
+            <button class="btn btn-edit" @click="openEdit(property)">{{ t("property.edit") }}</button>
+            <button class="btn btn-danger" @click="deleteProperty(property)">{{ t("property.delete") }}</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FORM MODAL -->
+    <div v-if="dialogVisible" class="modal-overlay">
+      <div class="modal">
+        <h3>{{ isEditing ? t("property.edit") : t("property.new") }}</h3>
+
+        <div class="form-group">
+          <label>{{ t("property.name") }}:</label>
+          <input v-model="form.name" type="text" />
+        </div>
+
+        <div class="form-group">
+          <label>{{ t("property.price") }}:</label>
+          <input v-model="form.price" type="number" />
+        </div>
+
+        <div class="form-group">
+          <label>{{ t("property.type.label") }}:</label>
+          <select v-model="form.type">
+            <option value="DEPARTMENT">{{ t("property.type.department") }}</option>
+            <option value="HOUSE">{{ t("property.type.house") }}</option>
+            <option value="LAND">{{ t("property.type.land") }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>{{ t("property.area") }}:</label>
+          <input v-model="form.area" type="number" />
+        </div>
+
+        <div class="form-group">
+          <label>{{ t("property.location") }}:</label>
+          <input v-model="form.location" type="text" />
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-text" @click="dialogVisible = false">{{ t("property.cancel") }}</button>
+          <button class="btn btn-success" @click="saveProperty">{{ t("property.save") }}</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</template>
+
 <script setup>
-import { reactive, ref, onMounted } from "vue";
-import { useI18n } from "vue-i18n";
+import { ref, onMounted } from "vue";
 import usePropertyStore from "../../property/application/property.store.js";
-import {PropertyEntity} from "../domain/model/property.entity.js";
-import {PropertyType} from "../domain/model/property-type.enum.js";
+import { PropertyEntity } from "../domain/model/property.entity.js";
+import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 const store = usePropertyStore();
 
 const dialogVisible = ref(false);
 const isEditing = ref(false);
-
-const form = reactive(new PropertyEntity());
-
-
-import { computed, unref } from "vue";
-
-const propertyTypeOptions = computed(() => [
-  { label: t("property.type.department"), value: PropertyType.DEPARTMENT },
-  { label: t("property.type.house"), value: PropertyType.HOUSE },
-  { label: t("property.type.land"), value: PropertyType.LAND }
-]);
-
-
+const form = ref(new PropertyEntity());
 
 onMounted(() => {
   if (!store.loaded) store.fetchProperties();
 });
 
 const resetForm = () => {
-  Object.assign(form, new PropertyEntity());
+  form.value = new PropertyEntity();
 };
 
 const openNew = () => {
@@ -39,163 +108,128 @@ const openNew = () => {
 };
 
 const openEdit = (property) => {
-  Object.assign(form, property);
+  form.value = new PropertyEntity({ ...property });
   isEditing.value = true;
   dialogVisible.value = true;
 };
 
-const saveProperty = () => {
-  if (isEditing.value) store.updateProperty({ ...form });
-  else store.addProperty({ ...form });
-
+const saveProperty = async () => {
+  if (isEditing.value) {
+    await store.updateProperty(form.value);
+  } else {
+    await store.addProperty(form.value);
+  }
   dialogVisible.value = false;
+  resetForm();
 };
 
-const deleteProperty = (property) => {
-  store.deleteProperty(property);
+const deleteProperty = async (property) => {
+  await store.deleteProperty(property);
 };
 </script>
 
-<template>
-  <div class="p-5">
-
-    <!-- TOOLBAR -->
-    <pv-toolbar class="mb-4 custom-toolbar shadow-2">
-      <template #start>
-        <h2 class="title">{{ t("property.title") }}</h2>
-      </template>
-
-      <template #end>
-        <pv-button
-            label="Nuevo"
-            icon="pi pi-plus"
-            class="p-button-rounded p-button-success"
-            @click="openNew"
-        />
-      </template>
-    </pv-toolbar>
-
-    <!-- TABLE -->
-    <pv-card class="shadow-3 p-4">
-      <pv-data-table
-          :value="store.properties"
-          stripedRows
-          paginator
-          :rows="10"
-      >
-        <pv-column field="name" :header="t('property.name')" />
-        <pv-column field="price" :header="t('property.price')" />
-        <pv-column field="type" :header="t('property.type')" />
-        <pv-column field="area" :header="t('property.area')" />
-        <pv-column field="location" :header="t('property.location')" />
-
-        <pv-column header="Acciones" style="width: 150px">
-          <template #body="{ data }">
-            <pv-button icon="pi pi-pencil" text rounded @click="openEdit(data)" />
-            <pv-button icon="pi pi-trash" text rounded severity="danger" @click="deleteProperty(data)" />
-          </template>
-        </pv-column>
-      </pv-data-table>
-    </pv-card>
-
-    <!-- FORM DIALOG -->
-    <pv-dialog
-        v-model:visible="dialogVisible"
-        modal
-        :header="isEditing ? 'Editar Propiedad' : 'Registrar Propiedad'"
-        class="dialog-custom"
-        :style="{ width: '40rem' }"
-    >
-
-      <div class="form-grid">
-
-        <pv-float-label>
-          <pv-input-text id="name" v-model="form.name" class="w-full" />
-          <label for="name">Nombre</label>
-        </pv-float-label>
-
-        <pv-float-label>
-          <pv-input-number id="price" v-model="form.price" class="w-full" inputClass="w-full" />
-          <label for="price">Precio</label>
-        </pv-float-label>
-
-        <pv-float-label>
-          <pv-select
-              v-model="form.type"
-              :options="propertyTypeOptions"
-              optionLabel="label"
-              optionValue="value"
-              inputId="type"
-              class="w-full"
-          />
-          <label for="type">Tipo</label>
-        </pv-float-label>
-
-
-
-        <pv-float-label>
-          <pv-input-number id="area" v-model="form.area" class="w-full" inputClass="w-full" />
-          <label for="area">Área (m²)</label>
-        </pv-float-label>
-
-        <pv-float-label class="form-item-full">
-          <pv-input-text id="location" v-model="form.location" class="w-full" />
-          <label for="location">Ubicación</label>
-        </pv-float-label>
-
-      </div>
-
-      <template #footer>
-        <pv-button label="Cancelar" class="p-button-text" @click="dialogVisible = false" />
-        <pv-button label="Guardar" class="p-button-success" @click="saveProperty" />
-      </template>
-
-    </pv-dialog>
-
-  </div>
-</template>
-
 <style scoped>
-.title {
-  font-weight: 700;
-  font-size: 1.5rem;
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-.custom-toolbar {
-  border-radius: 10px;
-  background: var(--p-surface-0);
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.header h2 {
+  margin: 0;
 }
 
-.dialog-custom {
-  border-radius: 14px;
+/* BUTTONS */
+.btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+}
+.btn:hover { opacity: 0.9; }
+.btn-success { background-color: #4caf50; color: #fff; }
+.btn-danger { background-color: #f44336; color: #fff; }
+.btn-edit { background-color: #2196f3; color: #fff; margin-right: 4px; }
+.btn-text { background-color: transparent; color: #555; }
+
+/* CARD */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  padding: 15px;
+  overflow-x: auto;
 }
 
-.form-grid {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+/* TABLE */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th, .table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+.table th {
+  background: #f5f5f5;
 }
 
-.form-item-full {
-  grid-column: span 2;
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+}
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 
-/* Efecto mejorado para labels */
-.p-float-label label {
-  left: 12px;
-  top: 14px;
-  transition: all 0.15s ease;
+/* FORM */
+.form-group {
+  margin-bottom: 12px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
-.p-float-label input:focus ~ label,
-.p-float-label input.p-filled ~ label,
-.p-float-label .p-inputnumber-input:focus ~ label,
-.p-float-label .p-inputnumber-input.p-filled ~ label,
-.p-float-label .p-dropdown.p-inputwrapper-focus ~ label,
-.p-float-label .p-dropdown.p-filled ~ label {
-  top: -10px;
-  font-size: 0.75rem;
-  opacity: 0.95;
+/* MODAL FOOTER */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
 }
 </style>

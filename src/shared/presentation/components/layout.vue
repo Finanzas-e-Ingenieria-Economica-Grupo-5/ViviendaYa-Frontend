@@ -7,7 +7,7 @@
             alt="Logo"
             class="logo"
         />
-        <span v-if="!collapsed" class="logo-text">Diabelife</span>
+        <span v-if="!collapsed" class="logo-text">ViviendaYa</span>
       </div>
 
       <nav class="menu">

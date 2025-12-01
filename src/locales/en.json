@@ -91,5 +91,18 @@
       "semiannual": "Semiannual",
       "annual": "Annual"
     }
+  },
+  "property": {
+    "title": "Properties",
+    "name": "Name",
+    "price": "Price",
+    "type": {
+      "label": "Type",
+      "department": "Department",
+      "house": "House",
+      "land": "Land"
+    },
+    "area": "Area (m²)",
+    "location": "Location"
   }
 }

@@ -249,5 +249,18 @@
     }
   ],
   "properties": [],
-  "customers": []
+  "customers": [
+    {
+      "firstName": "Gabriel",
+      "lastName": "Mamani",
+      "email": "raulmamani659@gmail.com",
+      "phone": "112121211",
+      "income": 23,
+      "dependents": 3,
+      "employmentStatus": "trabajando",
+      "maritalStatus": "casado",
+      "segment": "MiVivienda",
+      "id": 1
+    }
+  ]
 }
