@@ -170,7 +170,10 @@ const getCapitalizationLabel = (cap) => {
 
 onMounted(async () => {
   await store.loadConfig();
-  localConfig.value = new SystemConfigEntity({ ...store.config });
+  localConfig.value = new SystemConfigEntity({
+    ...store.config,
+    gracePeriodMonths: store.config.gracePeriod
+  });
   originalConfig.value = new SystemConfigEntity({ ...store.config });
 });
 
@@ -181,7 +184,10 @@ const startEditing = () => {
 
 const cancelEditing = () => {
   isEditing.value = false;
-  localConfig.value = new SystemConfigEntity({ ...originalConfig.value });
+  localConfig.value = new SystemConfigEntity({
+    ...store.config,
+    gracePeriodMonths: store.config.gracePeriod
+  });
 };
 
 const save = async () => {

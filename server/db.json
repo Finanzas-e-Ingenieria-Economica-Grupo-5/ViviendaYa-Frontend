@@ -240,12 +240,12 @@
   ],
   "system-config": [
     {
-      "id": 1,
-      "currency": "PEN",
+      "currency": "USD",
       "interestType": "NOMINAL",
-      "capitalization": "ANUAL",
-      "gracePeriodMonths": 6,
-      "financialInstitutions": []
+      "capitalization": "TRIMESTRAL",
+      "gracePeriod": 5,
+      "graceType": "Ninguno",
+      "id": 1
     }
   ],
   "properties": [],

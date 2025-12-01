@@ -15,7 +15,7 @@ export const useSystemConfigStore = defineStore("systemConfig", () => {
     // CARGAR CONFIG DE DB.JSON
     async function loadConfig() {
         try {
-            const res = await fetch("http://localhost:3001/systemConfig");
+            const res = await fetch("http://localhost:3000/system-config/1");
             const data = await res.json();
 
             // copiar cada campo para mantener la reactividad
@@ -32,7 +32,7 @@ export const useSystemConfigStore = defineStore("systemConfig", () => {
     // GUARDAR CAMBIOS EN DB.JSON
     async function updateConfig(newConfig) {
         try {
-            const res = await fetch("http://localhost:3001/systemConfig", {
+            const res = await fetch("http://localhost:3000/system-config/1", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newConfig)
@@ -40,15 +40,17 @@ export const useSystemConfigStore = defineStore("systemConfig", () => {
 
             const updated = await res.json();
 
-            // Volver a actualizar el estado reactivo
             config.currency = updated.currency;
             config.interestType = updated.interestType;
             config.capitalization = updated.capitalization;
             config.graceType = updated.graceType;
             config.gracePeriod = updated.gracePeriod;
 
+            return true;   // 👈 AGREGAR ESTO
+
         } catch (e) {
             console.error("Error updating config:", e);
+            return false;  // 👈 IMPORTANTE
         }
     }
 
