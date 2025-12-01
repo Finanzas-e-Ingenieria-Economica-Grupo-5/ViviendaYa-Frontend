@@ -1,0 +1,78 @@
+{
+  "page-not-found": {
+    "title": "Página no encontrada",
+    "content": "La ruta {unavailable-route} no se encuentra disponible.",
+    "go-home": "Ir a Inicio"
+  },
+  "profile": {
+    "userProfile": "Perfil de usuario",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "logout": "Cerrar sesión"
+  },
+  "customer": {
+    "title": "Clientes",
+    "new": "Nuevo Cliente",
+    "edit": "Editar Cliente",
+    "actions": "Acciones",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "income": "Ingresos",
+    "dependents": "Dependientes",
+    "employmentStatus": "Situación laboral",
+    "maritalStatus": "Estado civil",
+    "segment": "Segmento",
+    "save": "Guardar",
+    "cancel": "Cancelar"
+  },
+  "property": {
+    "title": "Propiedades",
+    "name": "Nombre",
+    "price": "Precio",
+    "type": "Tipo de Propiedad",
+    "area": "Área",
+    "location": "Ubicación",
+    "typeOptions": {
+      "department": "Departamento",
+      "house": "Casa",
+      "land": "Terreno"
+    }
+  },
+  "systemConfig": {
+    "title": "Configuración del Sistema",
+    "subtitle": "Configura los parámetros generales del sistema financiero",
+    "currency": "Moneda",
+    "interestType": "Tipo de Tasa",
+    "capitalization": "Capitalización",
+    "gracePeriod": "Plazo de Gracia (meses)",
+    "actions": "Acciones",
+    "edit": "Editar",
+    "save": "Guardar Configuración",
+    "cancel": "Cancelar",
+    "summary": "Resumen de Configuración",
+    "months": "meses",
+    "currencyOptions": {
+      "soles": "Soles",
+      "dollars": "Dólares"
+    },
+    "interestOptions": {
+      "nominal": "Nominal",
+      "effective": "Efectiva"
+    },
+    "capitalizationOptions": {
+      "monthly": "Mensual",
+      "bimonthly": "Bimestral",
+      "quarterly": "Trimestral",
+      "semiannual": "Semestral",
+      "annual": "Anual"
+    }
+  },
+  "sidebar": {
+    "customer": "Clientes",
+    "property": "Propiedades",
+    "configuration": "Configuración",
+    "logout": "Cerrar Sesión"
+  }
+}
