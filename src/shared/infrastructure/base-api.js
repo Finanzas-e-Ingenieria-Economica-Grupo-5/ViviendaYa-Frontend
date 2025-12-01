@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const platformApi = import.meta.env.VITE_DIABELIFE_PLATFORM_API_URL;
+const platformApi = import.meta.env.VITE_VIVIENDAYA_PLATFORM_API_URL;
 
 export class BaseApi {
     #http;

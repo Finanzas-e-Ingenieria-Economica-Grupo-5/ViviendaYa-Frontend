@@ -21,6 +21,17 @@
           <span v-if="!collapsed">{{ t('sidebar.property') }}</span>
         </RouterLink>
 
+        <RouterLink to="/finance/calculator">
+          <i class="pi pi-wallet"></i>
+          <span v-if="!collapsed">{{ t('sidebar.finance') }}</span>
+        </RouterLink>
+
+
+        <RouterLink to="/system-config">
+          <i class="pi pi-cog"></i>
+          <span v-if="!collapsed">{{ t('sidebar.configuration') }}</span>
+        </RouterLink>
+
         <button class="logout-btn" @click="handleLogout">
           <i class="pi pi-sign-out"></i>
           <span v-if="!collapsed">{{ t('sidebar.logout') }}</span>

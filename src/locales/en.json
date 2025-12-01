@@ -55,5 +55,41 @@
       "house": "House",
       "land": "Land"
     }
+  },
+  "sidebar": {
+    "customer": "Customer",
+    "property": "Property",
+    "finance": "Finance",
+    "configuration": "Configuration",
+    "logout": "Logout"
+  },
+  "systemConfig": {
+    "title": "System Configuration",
+    "subtitle": "Configure the general parameters of the financial system",
+    "currency": "Currency",
+    "interestType": "Interest Type",
+    "capitalization": "Capitalization",
+    "gracePeriod": "Grace Period (months)",
+    "actions": "Actions",
+    "edit": "Edit",
+    "save": "Save Configuration",
+    "cancel": "Cancel",
+    "summary": "Configuration Summary",
+    "months": "months",
+    "currencyOptions": {
+      "soles": "Soles",
+      "dollars": "Dollars"
+    },
+    "interestOptions": {
+      "nominal": "Nominal",
+      "effective": "Effective"
+    },
+    "capitalizationOptions": {
+      "monthly": "Monthly",
+      "bimonthly": "Bimonthly",
+      "quarterly": "Quarterly",
+      "semiannual": "Semiannual",
+      "annual": "Annual"
+    }
   }
 }

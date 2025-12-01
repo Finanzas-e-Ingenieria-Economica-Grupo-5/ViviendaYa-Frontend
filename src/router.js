@@ -7,6 +7,12 @@ import PageNotFound from "./shared/presentation/views/page-not-found.vue";
 import Home from "./shared/presentation/views/home.vue";
 import CustomerManagement from "./customer/presentation/views/customer-management.page.vue";
 import PropertyManagement from "./property/presentation/property-management.vue";
+import SystemConfig from "./systemConfig/presentation/system-config.vue";
+
+import FinanceCalculator from "../src/finance/presentation/FinanceCalculatorView.vue"
+import FinancialResults from "../src/finance/presentation/FinancialResultsView.vue";
+import AmortizationSchedule from "../src/finance/presentation/AmortizationScheduleView.vue";
+
 const routes = [
     {
         path: "/auth",
@@ -24,8 +30,25 @@ const routes = [
             { path: "", name: "home", component: Home, meta: { title: "Home" } },
             { path: "customer", name: "customer", component: CustomerManagement, meta: { title: "Customer" } },
             { path: "property", name: "property", component: PropertyManagement, meta: { title: "Property" } },
-
-
+            { path: "system-config", name: "system-config", component: SystemConfig, meta: { title: "Configuración" } },
+            {
+                path: "finance/calculator",
+                name: "finance-calculator",
+                component: FinanceCalculator,
+                meta: { title: "Finance Calculator" },
+            },
+            {
+                path: "finance/results",
+                name: "finance-results",
+                component: FinancialResults,
+                meta: { title: "Financial Results" },
+            },
+            {
+                path: "finance/schedule",
+                name: "finance-schedule",
+                component: AmortizationSchedule,
+                meta: { title: "Amortization Schedule" },
+            },
         ],
     },
 

@@ -27,5 +27,41 @@
     "segment": "Segmento",
     "save": "Guardar",
     "cancel": "Cancelar"
+  },
+  "sidebar": {
+    "customer": "Cliente",
+    "property": "Propiedad",
+    "finance": "Finanzas",
+    "configuration": "Configuración",
+    "logout": "Cerrar sesión"
+  },
+  "systemConfig": {
+    "title": "Configuración del Sistema",
+    "subtitle": "Configura los parámetros generales del sistema financiero",
+    "currency": "Moneda",
+    "interestType": "Tipo de Tasa",
+    "capitalization": "Capitalización",
+    "gracePeriod": "Plazo de Gracia (meses)",
+    "actions": "Acciones",
+    "edit": "Editar",
+    "save": "Guardar Configuración",
+    "cancel": "Cancelar",
+    "summary": "Resumen de Configuración",
+    "months": "meses",
+    "currencyOptions": {
+      "soles": "Soles",
+      "dollars": "Dólares"
+    },
+    "interestOptions": {
+      "nominal": "Nominal",
+      "effective": "Efectiva"
+    },
+    "capitalizationOptions": {
+      "monthly": "Mensual",
+      "bimonthly": "Bimestral",
+      "quarterly": "Trimestral",
+      "semiannual": "Semestral",
+      "annual": "Anual"
+    }
   }
 }

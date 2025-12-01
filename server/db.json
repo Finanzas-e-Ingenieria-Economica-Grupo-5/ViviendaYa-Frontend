@@ -13,30 +13,130 @@
       "id": 2
     }
   ],
-  "customers": [
+  "finance": [
+    {
+      "fecha": "2025-12-01T15:32:26.093Z",
+      "config": {
+        "montoCredito": 12000,
+        "moneda": "PEN",
+        "plazo": 12,
+        "tasaInteres": 14,
+        "tipoTasa": "Efectiva",
+        "capitalizacion": "Anual",
+        "tipoCredito": "TechoPropio",
+        "tipoGracia": "Ninguno",
+        "mesesGracia": 0,
+        "aplicaBono": true
+      },
+      "resultado": {
+        "schedule": [
+          {
+            "periodo": 1,
+            "interes": -32.93655585052036,
+            "cuota": -268.19766906852493,
+            "amortizacion": -235.26111321800457,
+            "saldo": -2764.7388867819955
+          },
+          {
+            "periodo": 2,
+            "interes": -30.353658918866888,
+            "cuota": -268.19766906852493,
+            "amortizacion": -237.84401014965803,
+            "saldo": -2526.8948766323374
+          },
+          {
+            "periodo": 3,
+            "interes": -27.74240474419824,
+            "cuota": -268.19766906852493,
+            "amortizacion": -240.4552643243267,
+            "saldo": -2286.4396123080105
+          },
+          {
+            "periodo": 4,
+            "interes": -25.10248199654163,
+            "cuota": -268.19766906852493,
+            "amortizacion": -243.0951870719833,
+            "saldo": -2043.3444252360273
+          },
+          {
+            "periodo": 5,
+            "interes": -22.433575927878607,
+            "cuota": -268.19766906852493,
+            "amortizacion": -245.7640931406463,
+            "saldo": -1797.580332095381
+          },
+          {
+            "periodo": 6,
+            "interes": -19.735368334618816,
+            "cuota": -268.19766906852493,
+            "amortizacion": -248.46230073390612,
+            "saldo": -1549.1180313614748
+          },
+          {
+            "periodo": 7,
+            "interes": -17.007537519661785,
+            "cuota": -268.19766906852493,
+            "amortizacion": -251.19013154886315,
+            "saldo": -1297.9278998126117
+          },
+          {
+            "periodo": 8,
+            "interes": -14.249758254042224,
+            "cuota": -268.19766906852493,
+            "amortizacion": -253.9479108144827,
+            "saldo": -1043.979988998129
+          },
+          {
+            "periodo": 9,
+            "interes": -11.461701738154169,
+            "cuota": -268.19766906852493,
+            "amortizacion": -256.7359673303708,
+            "saldo": -787.2440216677583
+          },
+          {
+            "periodo": 10,
+            "interes": -8.643035562549459,
+            "cuota": -268.19766906852493,
+            "amortizacion": -259.55463350597546,
+            "saldo": -527.6893881617827
+          },
+          {
+            "periodo": 11,
+            "interes": -5.793423668305824,
+            "cuota": -268.19766906852493,
+            "amortizacion": -262.4042454002191,
+            "saldo": -265.28514276156363
+          },
+          {
+            "periodo": 12,
+            "interes": -2.9125263069598355,
+            "cuota": -268.19766906852493,
+            "amortizacion": -265.2851427615651,
+            "saldo": 0
+          }
+        ],
+        "indicators": {
+          "van": 500.25,
+          "tir": 14,
+          "totalInteres": -218.37202882229786,
+          "totalAmortizacion": -3000.0000000000014,
+          "cuotaMensual": -268.19766906852493,
+          "ctc": -3218.3720288222994
+        }
+      },
+      "id": 1
+    }
+  ],
+  "system-config": [
     {
       "id": 1,
-      "firstName": "Juan",
-      "lastName": "Pérez",
-      "email": "juan@gmail.com",
-      "phone": "987654321",
-      "income": 2500,
-      "dependents": 2,
-      "employmentStatus": "Empleado",
-      "maritalStatus": "Soltero",
-      "segment": "MiVivienda"
-    },
-    {
-      "id": 2,
-      "firstName": "Lucía",
-      "lastName": "Torres",
-      "email": "lucia@gmail.com",
-      "phone": "912345678",
-      "income": 3500,
-      "dependents": 1,
-      "employmentStatus": "Independiente",
-      "maritalStatus": "Casada",
-      "segment": "Techo Propio"
+      "currency": "USD",
+      "interestType": "ELECTIVA",
+      "capitalization": "SEMESTRAL",
+      "gracePeriodMonths": 2,
+      "financialInstitutions": []
     }
-  ]
+  ],
+  "properties": [],
+  "customers": []
 }
