@@ -2,13 +2,13 @@
   <div class="auth-page">
     <div class="auth-card">
       <img
-          src="https://i.postimg.cc/JzxbPmgK/logo-removebg-preview.png"
+          src="https://i.postimg.cc/13qvP203/vivienda-Ya.png"
           class="logo"
           alt="Diabelife logo"
       />
 
       <h2>Crea tu cuenta</h2>
-      <p class="welcome-text">Únete a Diabelife y mejora tu control de salud.</p>
+      <p class="welcome-text">Únete a VIviendaYa .</p>
 
       <form @submit.prevent="handleRegister">
         <input v-model="username" type="text" placeholder="Usuario" required />

@@ -4,13 +4,13 @@
 
     <div class="auth-card">
       <img
-          src="https://i.postimg.cc/JzxbPmgK/logo-removebg-preview.png"
+          src="https://i.postimg.cc/13qvP203/vivienda-Ya.png"
           class="logo"
           alt="Diabelife logo"
       />
 
-      <h2>¡Bienvenido a Diabelife!</h2>
-      <p class="welcome-text">Controla tu diabetes y gestiona tu salud fácilmente.</p>
+      <h2>¡Bienvenido a ViviendaYa!</h2>
+      <p class="welcome-text">Realiza operaciones financieras sin problemas.</p>
 
       <form @submit.prevent="handleLogin">
         <input v-model="username" type="text" placeholder="Username" required />
