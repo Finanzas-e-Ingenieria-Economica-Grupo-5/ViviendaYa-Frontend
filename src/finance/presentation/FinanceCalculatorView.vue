@@ -123,22 +123,30 @@ const form = reactive({
   aplicaBono: true,
 });
 
-// ⚡ Lo que viene del Config ahora es COMPUTED (reactivo)
-const currencySymbol = computed(() =>
-    configStore.config.currency === "Soles" ? "S/" : "$"
-);
-
+// ⚡ Computeds de Config
 const tipoTasa = computed(() => configStore.config.interestType);
 const capitalizacion = computed(() => configStore.config.capitalization);
 const tipoGracia = computed(() => configStore.config.graceType || "Ninguno");
 const mesesGracia = computed(() => configStore.config.gracePeriod);
 
+// ⚡ Computed para moneda
+const currencySymbol = computed(() =>
+    configStore.config.currency === "PEN" || configStore.config.currency === "Soles" ? "S/" : "$"
+);
+
+
 onMounted(async () => {
-  console.log("🔄 Cargando configuración antes de mostrar la vista...");
+  console.log("🔄 Cargando configuración...");
   await configStore.loadConfig();
   console.log("✔ Configuración cargada:", configStore.config);
-});
 
+  // Inicializar creditData si está vacío
+  if (!finance.creditData) {
+    finance.creditData = {
+      moneda: configStore.config.currency === "Soles" ? "PEN" : "USD"
+    };
+  }
+});
 
 async function handleSubmit() {
   if (!form.tasaInteres || form.tasaInteres <= 0) {

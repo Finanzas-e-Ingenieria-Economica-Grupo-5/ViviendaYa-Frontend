@@ -1,70 +1,74 @@
 <template>
   <div class="results-page">
-    <h1 class="title">Financial Results</h1>
+    <h1 class="title">Resultados Financieros</h1>
     <p class="subtitle">Resumen de indicadores financieros y costos del crédito</p>
 
-    <div v-if="indicators" class="results-grid">
+    <!-- Renderiza solo si la config y los indicadores están listos -->
+    <div v-if="configLoaded && indicators && Object.keys(indicators).length" class="results-grid">
 
       <ResultCard
-        icon="📅"
-        label="Cuota Mensual"
-        :value="formatMoney(indicators.cuotaMensual)"
+          icon="📅"
+          label="Cuota Mensual"
+          :value="formatMoney(indicators.cuotaMensual)"
       />
 
       <ResultCard
-        icon="💰"
-        label="Total Intereses"
-        :value="formatMoney(indicators.totalInteres)"
+          icon="💰"
+          label="Total Intereses"
+          :value="formatMoney(indicators.totalInteres)"
       />
 
       <ResultCard
-        icon="📉"
-        label="Total Amortización"
-        :value="formatMoney(indicators.totalAmortizacion)"
+          icon="📉"
+          label="Total Amortización"
+          :value="formatMoney(indicators.totalAmortizacion)"
       />
 
       <ResultCard
-        icon="💳"
-        label="Costo Total (CTC)"
-        :value="formatMoney(indicators.ctc)"
+          icon="💳"
+          label="Costo Total (CTC)"
+          :value="formatMoney(indicators.ctc)"
       />
 
       <ResultCard
-        icon="📦"
-        label="Valor Actual Neto (VAN)"
-        :value="formatMoney(indicators.van)"
+          icon="📦"
+          label="Valor Actual Neto (VAN)"
+          :value="formatMoney(indicators.van)"
       />
 
       <ResultCard
-        icon="📈"
-        label="Tasa Interna de Retorno (TIR)"
-        :value="(indicators.tir ? indicators.tir.toFixed(2) : '0.00') + '%'"
+          icon="📈"
+          label="Tasa Interna de Retorno (TIR)"
+          :value="indicators.tir ? indicators.tir.toFixed(2) + '%' : '0.00%'"
       />
 
       <ResultCard
-        icon="🏦"
-        label="Ahorro Bono Techo Propio"
-        :value="formatMoney(15000)" 
+          icon="🏦"
+          label="Ahorro Bono Techo Propio"
+          :value="formatMoney(indicators.ahorroBono || 0)"
       />
 
       <ResultCard
-        icon="🏠"
-        label="Bono Aplicado"
-        :value="'Sí'"
+          icon="🏠"
+          label="Bono Aplicado"
+          :value="indicators.bonoAplicado ? 'Sí' : 'No'"
       />
+    </div>
+
+    <!-- Loading mientras no se cargan datos -->
+    <div v-else class="loading-text">
+      Cargando resultados...
     </div>
 
     <div class="button-row">
       <button class="btn-secondary" @click="goBack">Recalcular</button>
-      <button class="btn-primary" @click="goSchedule">
-        Ver Cronograma de Pagos
-      </button>
+      <button class="btn-primary" @click="goSchedule">Ver Cronograma de Pagos</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useFinanceStore } from "../application/finance.store.js";
 import { useSystemConfigStore } from "../../systemConfig/application/system-config.store.js";
@@ -74,31 +78,39 @@ const router = useRouter();
 const finance = useFinanceStore();
 const configStore = useSystemConfigStore();
 
+// Flag para saber si la config ya cargó
+const configLoaded = ref(false);
+
 // Indicadores calculados
-const indicators = computed(() => finance.indicators);
+const indicators = computed(() => finance.indicators || {});
 
-// 🔥 Símbolo de moneda según Config
+// 🔹 Símbolo de moneda según Config
 const currencySymbol = computed(() => {
-  return configStore.config.currency === "Soles" ? "S/" : "$";
+  if (!configStore.config.currency) return "S/";
+  // ✅ Maneja ambos formatos: "Soles"/"PEN" y "Dólares"/"USD"
+  return (configStore.config.currency === "Soles" || configStore.config.currency === "PEN")
+      ? "S/"
+      : "$";
 });
-
-// 🔥 Formato de dinero con símbolo dinámico
-function formatMoney(n) {
-  if (n === undefined || n === null) return currencySymbol.value + " 0.00";
-
-  return (
-      currencySymbol.value +
-      " " +
-      Number(n).toLocaleString("es-PE", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      })
-  );
+// 🔹 Función para formatear dinero con símbolo
+function formatMoney(value) {
+  if (value === undefined || value === null) return currencySymbol.value + " 0.00";
+  return currencySymbol.value + " " + Number(value).toLocaleString("es-PE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 }
 
-onMounted(() => {
-  if (!finance.indicators || !finance.indicators.cuotaMensual) {
-    // router.push("/finance/calculator");
+onMounted(async () => {
+  // Cargar configuración primero
+  await configStore.loadConfig();
+  configLoaded.value = true;
+
+  // Inicializar moneda en financeStore si no existe
+  if (!finance.creditData) {
+    finance.creditData = {
+      moneda: configStore.config.currency === "Soles" ? "PEN" : "USD"
+    };
   }
 });
 
@@ -139,6 +151,12 @@ function goSchedule() {
   gap: 20px;
   max-width: 1200px;
   width: 100%;
+}
+
+.loading-text {
+  margin: 50px 0;
+  font-size: 1.2rem;
+  opacity: 0.9;
 }
 
 .button-row {
