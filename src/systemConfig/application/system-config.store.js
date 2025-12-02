@@ -15,7 +15,7 @@ export const useSystemConfigStore = defineStore("systemConfig", () => {
     // CARGAR CONFIG DE DB.JSON
     async function loadConfig() {
         try {
-            const res = await fetch("http://localhost:3000/system-config/1");
+            const res = await fetch("https://fakeapi-vivendaya.onrender.com//system-config/1");
             const data = await res.json();
 
             // copiar cada campo para mantener la reactividad

@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/finance";
+const BASE_URL = "https://fakeapi-vivendaya.onrender.com/finance";
 
 export const financeApi = {
     async saveFinanceResult(data) {
