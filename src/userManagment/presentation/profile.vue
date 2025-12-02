@@ -38,7 +38,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import {useAuthStore} from "../application/user.store.js";
+import { useAuthStore } from "@/userManagment/application/user.store.js";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();

@@ -2,13 +2,13 @@
   <div class="auth-page">
     <div class="auth-card">
       <img
-          src="https://i.postimg.cc/13qvP203/vivienda-Ya.png"
+          src="https://i.postimg.cc/JzxbPmgK/logo-removebg-preview.png"
           class="logo"
-          alt="ViviendaYa logo"
+          alt="Diabelife logo"
       />
 
       <h2>Crea tu cuenta</h2>
-      <p class="welcome-text">Únete a ViviendaYa y facilita la elección del crédito ideal.</p>
+      <p class="welcome-text">Únete a Diabelife y mejora tu control de salud.</p>
 
       <form @submit.prevent="handleRegister">
         <input v-model="username" type="text" placeholder="Usuario" required />
@@ -32,7 +32,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import {useAuthStore} from "../application/user.store.js";
+import { useAuthStore } from '@/userManagment/application/user.store.js';
 import { useRouter } from 'vue-router';
 
 const auth = useAuthStore();

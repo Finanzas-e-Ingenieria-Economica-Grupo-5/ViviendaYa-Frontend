@@ -4,13 +4,13 @@
 
     <div class="auth-card">
       <img
-          src="https://i.postimg.cc/13qvP203/vivienda-Ya.png"
+          src="https://i.postimg.cc/JzxbPmgK/logo-removebg-preview.png"
           class="logo"
-          alt="ViviendaYa logo"
+          alt="Diabelife logo"
       />
 
-      <h2>¡Bienvenido a VivivendaYa!</h2>
-      <p class="welcome-text">Tu herramienta rápida y confiable para asesorar en créditos MiVivienda.</p>
+      <h2>¡Bienvenido a Diabelife!</h2>
+      <p class="welcome-text">Controla tu diabetes y gestiona tu salud fácilmente.</p>
 
       <form @submit.prevent="handleLogin">
         <input v-model="username" type="text" placeholder="Username" required />
@@ -32,7 +32,7 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import {useAuthStore} from "../application/user.store.js";
+import { useAuthStore } from '@/userManagment/application/user.store.js';
 import { useRouter } from 'vue-router';
 
 const auth = useAuthStore();
@@ -44,7 +44,7 @@ const password = ref('');
 const handleLogin = async () => {
   const success = await auth.login(username.value, password.value);
   console.log("Login success:", success);
-  if (success) router.push('/customer');
+  if (success) router.push('/gluco');
 };
 
 
