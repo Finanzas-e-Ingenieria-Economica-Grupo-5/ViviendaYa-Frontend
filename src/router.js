@@ -12,6 +12,7 @@ import SystemConfig from "./systemConfig/presentation/system-config.vue";
 import FinanceCalculator from "../src/finance/presentation/FinanceCalculatorView.vue"
 import FinancialResults from "../src/finance/presentation/FinancialResultsView.vue";
 import AmortizationSchedule from "../src/finance/presentation/AmortizationScheduleView.vue";
+import Profile from "./userManagment/presentation/profile.vue";
 
 const routes = [
     {
@@ -31,6 +32,9 @@ const routes = [
             { path: "customer", name: "customer", component: CustomerManagement, meta: { title: "Customer" } },
             { path: "property", name: "property", component: PropertyManagement, meta: { title: "Property" } },
             { path: "system-config", name: "system-config", component: SystemConfig, meta: { title: "Configuración" } },
+
+            { path: "profile", name: "profile", component: Profile, meta: { title: "Profile" } },
+
             {
                 path: "finance/calculator",
                 name: "finance-calculator",

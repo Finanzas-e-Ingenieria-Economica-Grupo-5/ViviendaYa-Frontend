@@ -33,7 +33,8 @@
     "property": "Propiedad",
     "finance": "Finanzas",
     "configuration": "Configuración",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "profile": "Perfil"
   },
   "systemConfig": {
     "title": "Configuración del Sistema",
@@ -82,5 +83,11 @@
     "save": "Guardar",
     "cancel": "Cancelar",
     "delete": "Eliminar"
+  },
+  "profile": {
+    "userProfile": "Perfil de usuario",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "logout": "Cerrar sesión"
   }
 }

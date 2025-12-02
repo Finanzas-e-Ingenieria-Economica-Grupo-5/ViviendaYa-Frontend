@@ -61,7 +61,8 @@
     "property": "Property",
     "finance": "Finance",
     "configuration": "Configuration",
-    "logout": "Logout"
+    "logout": "Logout",
+    "profile": "Profile"
   },
   "systemConfig": {
     "title": "System Configuration",
@@ -104,5 +105,11 @@
     },
     "area": "Area (m²)",
     "location": "Location"
+  },
+  "profile": {
+    "userProfile": "User Profile",
+    "email": "Email",
+    "password": "Password",
+    "logout": "Logout"
   }
 }

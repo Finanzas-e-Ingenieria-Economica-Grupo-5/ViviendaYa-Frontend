@@ -31,7 +31,10 @@
           <i class="pi pi-cog"></i>
           <span v-if="!collapsed">{{ t('sidebar.configuration') }}</span>
         </RouterLink>
-
+        <RouterLink to="/profile">
+          <i class="pi pi-user"></i>
+          <span v-if="!collapsed">{{ t('sidebar.profile') }}</span>
+        </RouterLink>
         <button class="logout-btn" @click="handleLogout">
           <i class="pi pi-sign-out"></i>
           <span v-if="!collapsed">{{ t('sidebar.logout') }}</span>
