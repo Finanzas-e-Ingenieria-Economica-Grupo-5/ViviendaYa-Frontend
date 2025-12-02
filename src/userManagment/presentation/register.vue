@@ -32,7 +32,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useAuthStore } from '@/userManagment/application/user.store.js';
+import { useAuthStore } from '../application/user.store.js';
 import { useRouter } from 'vue-router';
 
 const auth = useAuthStore();
